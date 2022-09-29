@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    setlocale(LC_ALL, "Russian");
+
+    const float price_1hour_work = 2.15;
+    const int price_1ton = 1650;
+    const int plan_package_minute = 12;
+    const float nadbavka1 = 0.083;
+    const float nadbavka2 = 0.32;
+
+    float package_1line, weight_1package;
+    float time_1smena;
+
+    float real_amount_package_1l, sebestoim, salary, real_weight;
+
+    int banch, amount_lines;
+
+    cout<<"Введите кол-во часов в смене: "<<endl;
+    cin>>time_1smena;
+
+    cout<<"Введите кол-во упаковок за смену с одной линии: "<<endl;
+    cin>>package_1line;
+
+    cout<<"Введите вес упаковки(кг): "<<endl;
+    cin>>weight_1package;
+
+    cout<<"Введите кол-во линий: "<<endl;
+    cin>>amount_lines;
+
+    real_amount_package_1l = package_1line / (time_1smena * 60);
+
+    real_weight = (package_1line * amount_lines)/1000;
+
+    sebestoim = (real_weight) * price_1ton; 
+
+    if (real_amount_package_1l == 12) {
+        salary = (time_1smena * price_1hour_work) + sebestoim * nadbavka1;
+        banch = 1;
+    }
+    else if (real_amount_package_1l > 12){
+        salary = (time_1smena * price_1hour_work) + sebestoim * nadbavka2; 
+        banch = 2;
+    }
+    else if (real_amount_package_1l < 12){
+        salary = (time_1smena * price_1hour_work);
+        banch = 3;
+    }
+
+    cout<<"-------------------------------------"<<endl;
+
+    cout<<"Зарплата "<< salary <<"\n";
+
+    cout<<"Ветка "<< banch <<"\n";
+
+    cout<<"Кол-во упаковок с 1 линии за смену "<< real_amount_package_1l <<"\n";
+
+    cout<<"Общий вес в тоннах(целое число) "<< real_weight <<"\n";
+
+    cout<<"Себестоимость: "<< sebestoim <<"\n";
+
+    return 0;
+}
+
+
