@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main() 
+ {  
+    float x1, x2, y1, y2, rasst;
+
+    cout <<"X1, Y1 = "<<endl;
+    cin >> x1 >> y1;
+
+    cout <<"X2, Y2 = "<<endl;
+    cin >> x2 >> y2;
+
+    if (x1 != 0 && y1 != 0 \
+    && x2 != 0 && y2 != 0)
+    {
+        rasst = sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+        cout << "Rasst " << rasst << "\n";
+    }
+
+    else 
+
+    {
+        cout<<"ERROR"<<endl;
+    }
+
+    return 0;
+ }
