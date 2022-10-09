@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    setlocale(LC_ALL, "Russian");
+
+    int x1, x2, x3, maxq;
+
+    cin >> x1 >> x2 >> x3;
+
+    if (x2>x1){
+        maxq = x2;
+    }
+    else{
+        maxq = x1;
+    }
+
+    if (maxq>x3){
+        cout << maxq << endl;
+    }
+    else{
+        cout << x3 <<endl;
+    }
+
+    /*maxq = max(x3, max(x1, x2));*/
+    // cout<<maxq<<"\n";
+
+    return 0;
+}
