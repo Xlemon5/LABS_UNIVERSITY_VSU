@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    int N, count_bags;
+    double productivity_line1, productivity_line2, step, weight_1bag_milk;
+    double weight_milk_iter, count_bags1;
+    double time_work;
+    
+    double const plotn = 1.24;
+
+
+    cout << "Введите производительность линии розлива (л/мин) " << "\n";
+    cin >> productivity_line1 >> productivity_line2;
+
+    cout << "Введите шаг перенастройки (л/мин) " << "\n";
+    cin >> step;
+
+    cout << "Введите массу молока(граммы) " << "\n";
+    cin >> weight_1bag_milk;
+
+    cout << "Введите кол-во часов в смене " << "\n";
+    cin >> time_work;
+
+
+    cout <<"----------------------------------------------------------"<< "\n";
+
+    N = 0;
+
+    weight_1bag_milk /= 1000;
+
+    printf("Производительность (л/мин)         Кол-во банок за смену(шт) \n");
+    
+    while (productivity_line1 <= productivity_line2)
+    {
+        weight_milk_iter = plotn * productivity_line1 * time_work * 60;
+
+        count_bags1 = floor(weight_milk_iter/weight_1bag_milk);
+
+        printf("   %10.2f %35.2f\n", productivity_line1, count_bags1);
+        
+        count_bags = 0;
+
+        N += 1;
+
+        productivity_line1 += step;
+    }
+
+    cout << "Кол-во итераций: " << N << "\n";
+    return 0;
+    system("pause");
+}
