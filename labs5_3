@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cmath>
+#define _USE_MATH_DEFINES // Для числа пи
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    const int MaxIter = 500;
+    
+    double x, eps;
+    double ch, y;
+    bool done;
+
+    cout<<"Введите аргумент и точность "<<"\n";
+    cin >> x >> eps;
+
+    //printf("                  Вычисление значения арктангенса \n");
+
+    //printf("значение аргумента     значение функции      кол-во просуммированных членов ряда");
+
+    ch = M_PI/2;
+
+    y = ch;
+
+    for (int i = 0; fabs(ch) > eps; i++)
+    {
+        ch *= (-1)*( 2 * i + 1) / ((2 * i + 3)*x*x);
+        y += ch;
+        
+        if (i > MaxIter)
+        {
+            cout<<"\n Ряд расходится";
+            done = false;
+            break;
+        }
+    }
+
+    if (done)
+    {
+        cout << "\n Значение функции: " << y << "для х= " << x << endl;
+    }
+
+    //cout<<"\n arctg= " << atan(x) << endl;
+    return 0;
+    system("pause");
+}
