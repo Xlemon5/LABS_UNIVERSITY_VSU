@@ -1,0 +1,50 @@
+#define _USE_MATH_DEFINES
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    const int MaxIter = 500;
+
+    double x, eps;
+    double ch, sum;
+    
+    cout << "Введите аргумент (<-1) и точность " <<"\n";
+    cin >> x >> eps;
+
+    bool done = true; 
+
+    ch = (-1) * (1/x) ;
+    sum = (-1) * (M_PI / 2);
+
+    sum += ch;
+
+    for (int n = 0; fabs(ch) > eps ; n++)
+    {
+        ch *= (-1)*(2 * n + 1)/((2 * n + 3) * x * x);
+        sum += ch;
+
+        if (n > MaxIter)
+        {
+            cout << "РЯД РАСХОДИТСЯ! \n";
+            done = false;
+            break;
+        }
+
+    }
+
+    if (done)
+    {
+        cout << "\n Значение функции: " << sum << " Для х = " << x << "\n";
+    }
+
+    cout << "Значение функции(встроенная): " << atan(x) << "\n";
+
+    return 0;
+    system ("pause");
+}
+
+
