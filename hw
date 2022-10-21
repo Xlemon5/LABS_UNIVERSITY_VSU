@@ -1,0 +1,184 @@
+//1 task
+
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    double x, y;
+
+    cout << "Введите координаты точки (x, y) " << endl;
+    cin >> x >> y;
+
+    if (x*x + y*y <= 1)
+    {
+        cout << "Принадлежит А " <<endl;
+    }
+
+    else if ((x*x + y*y >= 1) && (x>=0) && (x<=1) && (y>0) && (y<=1))
+    {
+        cout << "Принадлежит E " <<endl;
+    }
+
+    else if ((x>1) && (y <= 1))
+    {
+        cout << "Принадлежит F " <<endl;
+    }
+
+    else if ((x > 1) && (y > 1))
+    {
+        cout << "Принадлежит D " <<endl;
+    }
+
+    else if ((x < 1) && (y > 1))
+    {
+        cout << "Принадлежит C " <<endl;
+    }
+
+    else if ((x*x + y*y > 1) && (x < 1) && (y < 1))
+    {
+        cout << "Принадлежит В" << endl;
+    }
+
+    return 0;
+    system ("pause");
+}
+
+------------------------------------------------------------------------------------------------------------------------
+
+// 2 task
+
+
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    double x, y;
+
+    cout << "Введите координаты точки (x, y) " << endl;
+    cin >> x >> y;
+
+    if ((y>0) && (y > 4 - x*x) && (y > x* x - 2))
+    {
+        cout <<"A"<< endl;
+    }
+
+    else if ((x<0) && (y>=0) && (y<= 4 - x * x) && (y<= x*x - 2))
+    {
+        cout << "B" << endl;
+    }
+
+    else if ((x<=0) && (y>=0) && (y <= 4 - x*x))
+    {
+        cout << "C" << endl;
+    }
+
+    else if ((x<0) && (y < 0) && (y >= x*x - 2))
+    {
+        cout << "D" << endl;
+    }
+
+    else if ((x>=0) && (y >= 0) && (y <= 4 - x*x) && (y >= x * x - 2))
+    {
+        cout << "E" << endl;
+    }
+
+    else if ((x>=0) && (y <= 0) && (y >= x*x - 2))
+    {
+        cout << "F" << endl;
+    }
+
+    else if ((x>0) && (y >= 0) && (y < x*x - 2) && (y <= 4 - x * x))
+    {
+        cout << "G" << endl;
+    }
+
+    else if ((y <= 0) && (y < x*x - 2) && (y <= 4 - x * x))
+    {
+        cout << "H" << endl;
+    }
+
+
+
+    return 0;
+    system ("pause");
+}
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+task 3
+
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+
+    double x, y;
+
+    cout << "Введите координаты точки (x, y) " << endl;
+    cin >> x >> y;
+
+    if ((x < 0) && (y < 2 - x) && (y < x*x) && (y >= 0))
+    {
+        cout << "A" << endl;
+    }
+
+    else if ((x < 0) && (y > 2 - x) && (y < x*x) && (y > 0))
+    {
+        cout << "B" << endl;
+    }
+
+    else if ((y <= 2 - x) && (y >= x*x))
+    {
+        cout << "C" << endl;
+    }
+
+    else if ((y <= 2 - x) && (y <= x*x) && (y >= 0) && (x > 0))
+    {
+        cout << "D" << endl;
+    }
+
+    else if ((y >= 2 - x) && (y >= x*x))
+    {
+        cout << "E" << endl;
+    }
+
+    else if ((y < x * x) && (y > 2-x) && (x > 0) && (y > 0))
+    {
+        cout << "F" << endl;
+
+    }
+
+    else if ((y < 0) && (y < 2 - x))
+    {
+        cout << "G" << endl;
+    }
+
+    else if ((y < x * x) && (y > 2-x) && (x > 0) && (y < 0))
+    {
+        cout << "H" << endl;
+    }
+
+
+    return 0;
+    system ("pause");
+}
+
+
+
+
