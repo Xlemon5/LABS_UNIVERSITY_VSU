@@ -19,7 +19,7 @@ int main()
     int number_MAX_MAS;
     int flag = 0;
 
-    double sumelem;
+    double sumelem = 0;
     double a, b;
 
     //7 элементов double mas[n] = {-0.8, 1.8, 1.7, 2, 1.5, 20, 3.0};
