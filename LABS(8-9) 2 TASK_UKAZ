@@ -31,7 +31,8 @@ int main()
     double mas_t[n] = {0, 0, 0, 0 ,0 ,0 ,0, 0, 0, 0 };
     double MAX_MAS;
 
-    MAX_MAS = mas[0];
+    //MAX_MAS = mas[0];
+    MAX_MAS = *(mas); // ПРОВЕРИТЬ !!!!!!!!!
 
     cout <<"Введите границы отрезка [a, b]"<< "\n";
     cin >> a >> b;
