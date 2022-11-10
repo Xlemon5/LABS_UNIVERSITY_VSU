@@ -1,0 +1,153 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    /* 
+    Подключить 
+    #include <windows.h>
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    */
+
+    const int n = 7;
+
+    int number_MAX_MAS;
+    int flag = 0;
+
+    double sumelem;
+    double a, b;
+    double MAX_MAS;
+
+    //7 элементов double mas[n] = {-0.8, 1.8, 1.7, 2, 1.5, 20, 3.0};
+    //7 элементов double mas[n] = {-1.5, 2.23, 1.077, -2, 9.9, 3.37, 7.788};
+    
+    //double mas[n] = {-9.77, 0.23, 1.277, -5.76, 9.9, 3.37, 17.788, 9.4, 4.55, 7.33};
+
+    float *mas = new float[n];
+    float *mas_t = new float[n];
+
+    // инициализация массивов:
+    // аккуратно с n (n должно быть равно кол-ву элементов)
+
+    cout <<"Введите элементы массива: "<< '\n';
+    for (int i = 0; i < n; i++)
+    {
+        cin >> *(mas+i);
+    }
+
+    for (int i = 0; i < n; i ++ )
+    {
+        *(mas_t) = 0;
+    }
+
+
+    /*
+    cout <<"Вывод массива т "<< '\n';
+    for (int i = 0; i < n; i ++ )
+    {
+        cout << mas_t[i] << ' ';
+    }
+    cout << '\n';
+    */
+
+// ____________________________main_part_______________________________// 
+    
+    MAX_MAS = *(mas);
+
+    cout <<"Введите границы отрезка [a, b]"<< "\n";
+    cin >> a >> b;
+
+    // нахождение максимального числа
+
+    for (int i = 1; i < n ; i++)
+    {
+        //if (fabs(mas[i]) >= MAX_MAS)
+        if(fabs(*(mas + i)) >= MAX_MAS)
+        {
+            //MAX_MAS = mas[i];
+            MAX_MAS = *(mas + i);
+            number_MAX_MAS = i + 1;
+        }
+    }
+
+    cout <<"\n";
+
+    // нахождение суммы
+    for (int i = 0; i < n; ++i)
+    {
+        if (flag == 1)
+        {
+            //sumelem += mas[i];
+            sumelem += *(mas + i);
+        }
+
+        //if ((mas[i] >= 0) && (flag == 0))
+        if( (*(mas + i)>=0) && (flag == 0) )
+        {
+            //sumelem += mas[i];
+            //sumelem += *(mas + i);
+            flag = 1;
+        }
+    }
+
+    // сортировка
+
+    int j = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        //if (trunc(mas[i]) >= a && trunc(mas[i]) <= b)
+        if (trunc(*(mas + i)) >= a && trunc(*(mas + i)) <= b)
+        {
+            //mas_t[j] = mas[i];
+            *(mas_t + j) = *(mas + i);
+            j += 1;
+        }
+    }
+
+    for (int i = 0; i < n; ++ i)
+    {
+        //if (!(trunc(mas[i]) >= a && trunc(mas[i]) <= b))
+        if (!(trunc(*(mas + i)) >= a && trunc(*(mas + i)) <= b))
+        {
+            //mas_t[j] = mas[i];
+            *(mas_t + j) = *(mas + i);
+            j += 1;
+        }
+    }
+
+
+    cout << "Максимальный по модулю элемент массива: " << MAX_MAS << ", его номер: "<< number_MAX_MAS << "\n";
+
+    cout <<"\n";
+
+    cout << "Сумма элементов, расположенных после первого положит.: " << sumelem << "\n";
+
+    cout <<"\n";
+
+    cout << "Исходный массив: " << "\n";
+    for (int i = 0; i < n; ++i)
+    {
+       //cout << mas[i] << " ";
+       cout << *(mas + i) << " ";
+    }
+
+    cout <<"\n";
+    cout <<"\n";
+
+    cout << "Измененный массив: " << "\n";
+    for (int i = 0; i < n; ++i)
+    {
+       //cout << mas_t[i] << " ";
+       cout << *(mas_t + i) << " ";
+    }
+
+    delete[] mas;
+    delete[] mas_t;
+
+
+    return 0;
+    system("pause");
+} 
