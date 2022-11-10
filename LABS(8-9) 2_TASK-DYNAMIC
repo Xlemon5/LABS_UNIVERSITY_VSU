@@ -5,32 +5,28 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    /* 
-    Подключить 
-    #include <windows.h>
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-    */
 
-    const int n = 7;
+    int n;
 
     int number_MAX_MAS;
     int flag = 0;
 
-    double sumelem;
+    double sumelem = 0;
     double a, b;
     double MAX_MAS;
 
-    //7 элементов double mas[n] = {-0.8, 1.8, 1.7, 2, 1.5, 20, 3.0};
+    //7 элементов double mas[n] = {-0.8, 1.8, 1.7, 2, 1.5, 20, 3};
     //7 элементов double mas[n] = {-1.5, 2.23, 1.077, -2, 9.9, 3.37, 7.788};
-    
     //double mas[n] = {-9.77, 0.23, 1.277, -5.76, 9.9, 3.37, 17.788, 9.4, 4.55, 7.33};
 
+    cout << "Введите размерность массива: " <<'\n';
+    cin >> n;
+
+    cout<<'\n';
+    
     float *mas = new float[n];
     float *mas_t = new float[n];
 
-    // инициализация массивов:
-    // аккуратно с n (n должно быть равно кол-ву элементов)
 
     cout <<"Введите элементы массива: "<< '\n';
     for (int i = 0; i < n; i++)
@@ -44,15 +40,6 @@ int main()
     }
 
 
-    /*
-    cout <<"Вывод массива т "<< '\n';
-    for (int i = 0; i < n; i ++ )
-    {
-        cout << mas_t[i] << ' ';
-    }
-    cout << '\n';
-    */
-
 // ____________________________main_part_______________________________// 
     
     MAX_MAS = *(mas);
@@ -64,10 +51,8 @@ int main()
 
     for (int i = 1; i < n ; i++)
     {
-        //if (fabs(mas[i]) >= MAX_MAS)
         if(fabs(*(mas + i)) >= MAX_MAS)
         {
-            //MAX_MAS = mas[i];
             MAX_MAS = *(mas + i);
             number_MAX_MAS = i + 1;
         }
@@ -80,15 +65,13 @@ int main()
     {
         if (flag == 1)
         {
-            //sumelem += mas[i];
+
             sumelem += *(mas + i);
         }
 
-        //if ((mas[i] >= 0) && (flag == 0))
+
         if( (*(mas + i)>=0) && (flag == 0) )
         {
-            //sumelem += mas[i];
-            //sumelem += *(mas + i);
             flag = 1;
         }
     }
@@ -98,10 +81,8 @@ int main()
     int j = 0;
     for (int i = 0; i < n; ++i)
     {
-        //if (trunc(mas[i]) >= a && trunc(mas[i]) <= b)
         if (trunc(*(mas + i)) >= a && trunc(*(mas + i)) <= b)
         {
-            //mas_t[j] = mas[i];
             *(mas_t + j) = *(mas + i);
             j += 1;
         }
@@ -109,10 +90,8 @@ int main()
 
     for (int i = 0; i < n; ++ i)
     {
-        //if (!(trunc(mas[i]) >= a && trunc(mas[i]) <= b))
         if (!(trunc(*(mas + i)) >= a && trunc(*(mas + i)) <= b))
         {
-            //mas_t[j] = mas[i];
             *(mas_t + j) = *(mas + i);
             j += 1;
         }
@@ -130,7 +109,6 @@ int main()
     cout << "Исходный массив: " << "\n";
     for (int i = 0; i < n; ++i)
     {
-       //cout << mas[i] << " ";
        cout << *(mas + i) << " ";
     }
 
@@ -140,7 +118,6 @@ int main()
     cout << "Измененный массив: " << "\n";
     for (int i = 0; i < n; ++i)
     {
-       //cout << mas_t[i] << " ";
        cout << *(mas_t + i) << " ";
     }
 
