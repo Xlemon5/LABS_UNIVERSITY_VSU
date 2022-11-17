@@ -1,0 +1,154 @@
+#include <iostream>
+//#include <windows.h>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+    //SetConsoleCP(1251);
+    //SetConsoleOutputCP(1251);
+
+    setlocale(LC_ALL, "Russian");
+
+
+
+    const int m = 2, n = 2, t = 2;
+    double maxA = -100000000000000000, maxB = -100000000000000000;
+    int b_k = 0, b_i = 0, b_j = 0;
+    int a_k = 0, a_i = 0, a_j = 0;
+
+
+    // создание массивов
+    double matA[m][n][t];
+    double matB[m][n][t];
+
+
+    // ВВОД ДАННЫХ
+    cout << "Введите элементы матрицы А: " << '\n';
+
+    for (int k = 0; k < t; ++k)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < n; ++j)
+            {
+
+                // ВВОД ДАННЫХ В МАССИВ А 
+                printf("\n matA[%d][%d][%d]:", k, i, j);
+                cin >> matA[k][i][j];
+
+                // НАХОЖДЕНИЕ МАКСИМАЛЬНОГО ЭЛЕМЕНТА А
+                if (matA[k][i][j] > maxA)
+                {
+                    maxA = matA[k][i][j];
+                    a_k = k;
+                    a_i = i;
+                    a_j = j;
+                }
+            }
+        }
+    }
+
+
+
+    // работа с матрицей B
+    for (int k = 0; k < t; ++k) // 1
+    {
+        for (int i = 0; i < n; ++i) // 2
+        {
+            for (int j = 0; j < m; ++j) // 3
+            {
+
+                // РАССЧЕТ МАТРИЦЫ В
+                if (matA[k][i][j] != 0)
+                {
+                    matB[k][i][j] = 1 / matA[k][i][j];
+                }
+                else
+                {
+                    matB[k][i][j] = maxA;
+                }
+
+
+                // НАХОЖДЕНИЕ МАКСИМАЛЬНОГО ЭЛЕМЕНТА В:
+                
+                if (matB[k][i][j] > maxB)
+                {
+                    maxB = matB[k][i][j];
+
+                    b_k = k;
+                    b_i = i;
+                    b_j = j;
+                }
+            }
+        }
+    }
+
+    cout<<"-------------------------"<<'\n';
+
+    // вывод результатов
+
+    //вывод массива А
+    cout << "Массив A (ВВОДИТСЯ) " << '\n';
+    for(int k = 0; k < t; ++k)
+    {
+        printf("\n %3d - я страница \n", k + 1);
+
+        for (int i = 0; i < n; ++i)
+        {
+            for(int j = 0; j < m; ++j)
+            {
+                printf("%6.2f ", matA[k][i][j]);
+            }
+
+            cout <<'\n';
+        }
+    }
+    cout << '\n';
+
+    cout <<"Максимальный элемент массива А: " << maxA << '\n';
+    cout << "Его координаты: " << "\n";
+
+    //cout << "a_k: " << a_k <<"; "<< "a_i: " << a_i << "; "<< "a_j: " << a_j << '\n';
+    
+    cout << "a_k: " << a_k << '\n';
+    cout << "a_i: " << a_i << '\n';
+    cout << "a_j: " << a_j << '\n';
+
+    cout << '\n'; 
+    cout<<"-------------------------"<<'\n';
+    
+    // ВЫВОД МАССИВА В
+
+    cout << "Массив В (РАССЧЕТНЫЙ) " << '\n';
+    for(int k = 0; k < t; ++k)
+    {
+        printf("\n %3d-я страница \n", k + 1);
+
+        for (int i = 0; i < n; ++i) 
+        {
+            for (int j = 0; j < m; ++j) 
+            {
+                printf("%6.2f ", matB[k][i][j]);
+
+                //поэлементный вывод
+                //printf("\n matB[%d][%d][%d]:", k, i, j);
+                //cout << matB[k][i][j];
+            }
+
+            cout << '\n';
+        }
+    }
+
+    cout << "\n";
+
+    cout <<"Максимальный элемент массива В: "<< maxB << '\n';
+
+    cout << "Его координаты: " << "\n";
+    cout << "b_k: " << b_k << '\n';
+    cout << "b_i: " << b_i << '\n';
+    cout << "b_j: " << b_j << '\n';
+
+    return 0;
+}
