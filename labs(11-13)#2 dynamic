@@ -1,0 +1,210 @@
+#include <iostream>
+//#include <windows.h>
+#include <ctime>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+    //SetConsoleCP(1251);
+    //SetConsoleOutputCP(1251);
+
+    srand(time(0));
+    setlocale(LC_ALL, "Russian");
+
+    int t = 0, n = 0, m = 0;
+    //long double maxA = -100000000000000000, maxB = -100000000000000000;
+    int b_k = 0, b_i = 0, b_j = 0;
+    int a_k = 0, a_i = 0, a_j = 0;
+
+    cout << "Введите размерность массива (страницы/строки/столбцы)" << "\n";
+    cin >> t >> n >> m;
+
+
+    // создание массивов
+
+    // Массив А
+    double ***matA = new double ** [t];
+
+    for(int i = 0; i < t; ++i)
+    {
+        matA[i] = new double* [n];
+        for(int j = 0; j < n; ++j)
+        {
+            matA[i][j] = new double [m];
+        }
+    }
+
+    // Массив В
+    double ***matB = new double ** [t];
+
+    for(int i = 0; i < t; ++i)
+    {
+        matB[i] = new double* [n];
+        for(int j = 0; j < n; ++j)
+        {
+            matB[i][j] = new double [m];
+        }
+    }
+
+    double maxA = matA[0][0][0], maxB = matB[0][0][0];
+
+    // ВВОД ДАННЫХ
+    //cout << "Введите элементы матрицы А: " << '\n';
+
+    for (int k = 0; k < t; ++k)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < m; ++j)
+            {
+
+                // ВВОД ДАННЫХ В МАССИВ А
+                //printf("\n matA[%d][%d][%d]:", k, i, j);
+                //cin >> matA[k][i][j];
+                matA[k][i][j] = rand() % 10;
+
+                // НАХОЖДЕНИЕ МАКСИМАЛЬНОГО ЭЛЕМЕНТА А
+                if (matA[k][i][j] > maxA)
+                {
+                    maxA = matA[k][i][j];
+                    a_k = k;
+                    a_i = i;
+                    a_j = j;
+                }
+            }
+        }
+    }
+
+
+
+    // работа с матрицей B
+    for (int k = 0; k < t; ++k) // 1
+    {
+        for (int i = 0; i < n; ++i) // 2
+        {
+            for (int j = 0; j < m; ++j) // 3
+            {
+
+                // РАССЧЕТ МАТРИЦЫ В
+                if (matA[k][i][j] != 0)
+                {
+                    matB[k][i][j] = 1 / matA[k][i][j];
+                }
+                else
+                {
+                    matB[k][i][j] = maxA;
+                }
+
+
+                // НАХОЖДЕНИЕ МАКСИМАЛЬНОГО ЭЛЕМЕНТА В:
+
+                if (matB[k][i][j] > maxB)
+                {
+                    maxB = matB[k][i][j];
+
+                    b_k = k;
+                    b_i = i;
+                    b_j = j;
+                }
+            }
+        }
+    }
+
+    cout<<"-------------------------"<<'\n';
+
+    // вывод результатов
+
+    //вывод массива А
+    cout << "Массив A (ВВОДИТСЯ) " << '\n';
+    for(int k = 0; k < t; ++k)
+    {
+        printf("\n %3d - я страница \n", k + 1);
+
+        for (int i = 0; i < n; ++i)
+        {
+            for(int j = 0; j < m; ++j)
+            {
+                printf("%6.2f ", matA[k][i][j]);
+            }
+
+            cout <<'\n';
+        }
+    }
+    cout << '\n';
+
+    cout <<"Максимальный элемент массива А: " << maxA << '\n';
+    cout << "Его координаты: " << "\n";
+
+    //cout << "a_k: " << a_k <<"; "<< "a_i: " << a_i << "; "<< "a_j: " << a_j << '\n';
+
+    cout << "a_k: " << a_k << '\n';
+    cout << "a_i: " << a_i << '\n';
+    cout << "a_j: " << a_j << '\n';
+
+    cout << '\n';
+    cout<<"-------------------------"<<'\n';
+
+    // ВЫВОД МАССИВА В
+
+    cout << "Массив В (РАССЧЕТНЫЙ) " << '\n';
+    for(int k = 0; k < t; ++k)
+    {
+        printf("\n %3d-я страница \n", k + 1);
+
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < m; ++j)
+            {
+                printf("%6.2f ", matB[k][i][j]);
+
+                //поэлементный вывод
+                //printf("\n matB[%d][%d][%d]:", k, i, j);
+                //cout << matB[k][i][j];
+            }
+
+            cout << '\n';
+        }
+    }
+
+    cout << "\n";
+
+    cout <<"Максимальный элемент массива В: "<< maxB << '\n';
+
+    cout << "Его координаты: " << "\n";
+    cout << "b_k: " << b_k << '\n';
+    cout << "b_i: " << b_i << '\n';
+    cout << "b_j: " << b_j << '\n';
+
+
+    // ЧИСТКА ПАМЯТИ
+
+    // УДАЛЕНИЕ МАССИВА А
+
+    for(int i = 0; i < t; ++i)
+    {
+
+        for(int j = 0; j < n; ++j)
+        {
+            delete[] matA[i][j];
+        }
+        delete[] matA[i];
+    }
+    delete[] matA;
+
+    // Массив В
+
+    for(int i = 0; i < t; ++i)
+    {
+
+        for(int j = 0; j < n; ++j)
+        {
+            delete[] matB[i][j];
+        }
+        delete[] matB[i];
+    }
+    delete[] matB;
+
+    return 0;
+}
