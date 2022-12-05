@@ -1,0 +1,170 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+//#include <Windows.h>
+#include <cstdio>
+
+using namespace std;
+
+
+int main()
+{
+    /*
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    */
+
+    setlocale(LC_ALL, "Russian");
+
+    int count_otl = 0, count_other = 0;
+
+    const int m = 5; // кол-во строк в массиве
+    const int n = 90; // максимальная длина строки
+
+    char a[m][n] = { "1) Винокуров экзамены : 5 5 5 5 5 ; зачеты : + + + + + + + +",
+                     "2) Иванов    экзамены : 4 3 4 4 5 ; зачеты : + - - + + - + +",
+                     "3) Петров    экзамены : 5 4 3 2 2 ; зачеты : + + + - + - + +",
+                     "4) Максимов  экзамены : 5 5 5 5 5 ; зачеты : + + + + + + + +",
+                     "5) Родионов  экзамены : 5 2 4 5 5 ; зачеты : + - + + - + - +" };
+
+
+
+
+    printf("\n Исходный массив строк: \n");
+    for (int i = 0; i < m; ++i)
+    {
+        puts(a[i]);
+    }
+
+
+    // выделение памяти под побочные массивы
+    int numb[m];
+    int marks[m][5];
+    char zachet[m][8];
+
+
+    ///////////////////////////// ВЫДЕЛЕНИЕ ИНФОРМАЦИИ ИЗ МАССИВА СТРОК /////////////////////////////
+
+
+    // получение номера человека из списка
+    for (int i = 0; i < m; ++i)
+    {
+        // получение номера учащегося
+        numb[i] = atoi(a[i]);
+    }
+
+
+    // получение оценок
+    for(int i = 0; i < m; ++i)
+    {
+        for(int j = 0; j < 5; ++j)
+        {
+            //marks[i][j] = atof(&a[i][24 + (j*2)]);
+            marks[i][j] = atof(&a[i][24 + (j*2)]);
+        }
+    }
+
+
+    // получение результатов зачета
+    for (int i = 0; i < m; ++i)
+    {
+        for(int j = 0; j < 8; ++j)
+        {
+            //zachet[i][j] = a[i][52 + (j*2)];
+            zachet[i][j] = a[i][45 + (j*2)];
+
+        }
+        cout << endl;
+    }
+
+    cout << '\n';
+
+
+    ///////////////////////////// ПРОВЕРКА УСЛОВИЙ ///////////////////////////////
+
+    int flag_marks[m];
+    int flag_zachet[m];
+
+    int k = 0;
+
+    // проверка массива оценок
+    for(int i = 0; i < m ; ++i)
+    {
+        for(int j = 0; j < 5; ++j)
+        {
+            if(marks[i][j] == 5)
+            {
+                k += 1;
+            }
+        }
+        flag_marks[i] = k;
+        k = 0;
+    }
+
+
+    // проверка массива зачетов
+
+    int p = 0;
+
+    for(int i = 0; i < m; ++i)
+    {
+        for(int j = 0; j < 8; ++j)
+        {
+            if(zachet[i][j] == '+')
+            {
+                p += 1;
+            }
+        }
+        flag_zachet[i] = p;
+        p = 0;
+    }
+
+
+    //////////// ВЫВОД РЕЗУЛЬТАТОВ //////////////////////
+    cout << "MARKS" << '\n';
+    for(int i = 0; i < m; ++i)
+    {
+        for(int j = 0; j < 5; ++j)
+        {
+            cout << marks[i][j] << ' ';
+        }
+        cout <<' '<< flag_marks[i];
+        cout << '\n';
+    }
+
+    cout << '\n';
+    cout << "ZACHET" << '\n';
+    for(int i = 0; i < m; ++i)
+    {
+        for(int j = 0; j < 8; ++j)
+        {
+            cout << zachet[i][j] << ' ';
+        }
+        cout << ' ' << flag_zachet[i];
+        cout << '\n';
+
+    }
+
+    ////////////////////////////////////////////////////////////
+
+    for(int i = 0; i < m; ++i)
+    {
+        if(flag_marks[i] == 5 && flag_zachet[i] == 8)
+        {
+            count_otl += 1;
+        }
+        else
+        {
+            count_other += 1;
+        }
+    }
+
+    cout << '\n';
+    cout << "Кол-во отличников: " << count_otl << '\n';
+
+    cout << '\n';
+    cout << "Кол-во неуспевающих: " << count_other << '\n';
+
+
+
+    return 0;
+}
